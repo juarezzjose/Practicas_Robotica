@@ -1,0 +1,201 @@
+<robot name="rrp_robot">
+  
+  <!-- Materiales -->
+  <material name="red">
+    <color rgba="1 0 0 1" />
+  </material>
+  <material name="green">
+    <color rgba="0 1 0 1" />
+  </material>
+  <material name="blue">
+    <color rgba="0 0 1 1" />
+  </material>
+  <material name="lila">
+    <color rgba="0.37 0.3 0.9 1" />
+  </material>
+  <material name="Red_Dark">
+    <color rgba="0.3 0.02 0.015 1" />
+  </material>
+  <material name="cyan">
+    <color rgba="0 1 1 1" />
+  </material>
+  <material name="black">
+    <color rgba="0 0 0 1" />
+  </material>
+  <material name="yellow">
+    <color rgba="1 1 0 1" />
+  </material>
+    <material name="cafe">
+    <color rgba="0.7 0.4 0.2 1" />
+  </material>
+  
+  
+  <!--Definició de eslabones-->
+  <link name="world_link">
+  </link>
+  <link name="base_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="1.57 0 0" />
+    <geometry>
+      <box size="0.2 0.1 0.2" />
+    </geometry>
+    <material name="black">
+    </material>
+  </visual>
+  </link>
+  <link name="x_axis">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size="0.4 0.05 0.05" />
+    </geometry>
+    <material name="red">
+    </material>
+  </visual>
+  </link>
+  <link name="y_axis">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size="0.05 0.4 0.05" />
+    </geometry>
+    <material name="green">
+    </material>
+  </visual>
+  </link>
+  <link name="z_axis">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size="0.05 0.05 0.4" />
+    </geometry>
+    <material name="blue">
+    </material>
+  </visual>
+  </link>
+  
+  <link name="shoulder_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <cylinder radius="0.05" length="0.7" />
+    </geometry>
+    <material name="Red_Dark">
+    </material>
+  </visual>
+  </link>
+  <link name="arm_link">
+  <visual>
+    <origin xyz="0 -0.15 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder radius="0.05" length="0.5" />
+    </geometry>
+    <material name="lila">
+    </material>
+  </visual>
+  </link>
+  <link name="AzulClaro">
+  <visual>
+    <origin xyz="0 -0.15 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder radius="0.05" length="0.5"  />
+    </geometry>
+    <material name="cyan" />
+  </visual>
+  </link>
+  
+<link name="Dedo">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size="0.05 0.3 0.05" />
+    </geometry>
+    <material name="yellow">
+    </material>
+  </visual>
+  </link>
+
+<link name="cafe_eslabon">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size="0.09 0.3 0.09" />
+    </geometry>
+    <material name="cafe">
+    </material>
+  </visual>
+  </link>
+  
+  
+  
+  <!--Definición de juntas-->
+  <joint name="world_joint" type="fixed">
+    <parent link="world_link" />
+    <child link="base_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+  
+<!-- Union negro y rojo-->
+  <joint name="shoulder_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="shoulder_link" />
+    <origin xyz="0 0 0.3" rpy="0 0 0" />
+
+  </joint>
+  <joint name="x_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="x_axis" />
+    <origin xyz="0.2 0 0" rpy="0 0 0" />
+  </joint>
+  <joint name="y_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="y_axis" />
+    <origin xyz="0 0.2 0" rpy="0 0 0" />
+    <axis xyz="0 0 0" />
+  </joint>
+  
+  <joint name="z_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="z_axis" />
+    <origin xyz="0 0 0.2" rpy="0 0 0" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+
+
+	<!-- Unión entre Lila y Rojo -->
+  <joint name="Lila_joint" type="revolute">
+    <parent link="shoulder_link" />
+    <child link="arm_link" />
+    <origin xyz="0 0 0.375" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit effort="10.0" lower="-3.25" upper="3.25" velocity="0.5" />
+  </joint>
+  <joint name="AzulClaro_joint" type="revolute">
+    <parent link="arm_link" />
+    <child link="AzulClaro" />
+    <origin xyz="0 -0.35 0.1" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit effort="10.0" lower="-2.75" upper="2.75" velocity="0.5" />
+  </joint>
+
+
+<!-- AzulClaro con Dedo-->
+  <joint name="Prismatica" type="prismatic">
+    <parent link="AzulClaro" />
+    <child link="Dedo" />
+    <origin xyz="0 -0.3 -0.4" rpy="1.57 0 0" />
+    <axis xyz="0 1 0" />
+    <limit effort="3.0" lower="-0.02" upper="0.2" velocity="0.1" />
+  </joint>
+
+<!-- Amarillo y cafe-->
+  <joint name="Prismatica" type="fixed">
+    <parent link="AzulClaro" />
+    <child link="cafe_eslabon" />
+    <origin xyz="0 -0.3 -0.15" rpy="1.57 0 0" />
+  </joint>
+
+</robot>
+
