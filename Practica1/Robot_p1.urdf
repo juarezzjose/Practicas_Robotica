@@ -134,25 +134,33 @@
     <child link="base_link" />
     <origin xyz="0 0 0" rpy="0 0 0" />
     <axis xyz="0 0 1" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
   </joint>
   
+
 <!-- Union negro y rojo-->
   <joint name="shoulder_joint" type="fixed">
     <parent link="base_link" />
     <child link="shoulder_link" />
     <origin xyz="0 0 0.3" rpy="0 0 0" />
-
+    <limit effort="0" lower="0" upper="0" velocity="0" />
   </joint>
+
+
   <joint name="x_joint" type="fixed">
     <parent link="base_link" />
     <child link="x_axis" />
     <origin xyz="0.2 0 0" rpy="0 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
   </joint>
+
+
   <joint name="y_joint" type="fixed">
     <parent link="base_link" />
     <child link="y_axis" />
     <origin xyz="0 0.2 0" rpy="0 0 0" />
     <axis xyz="0 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
   </joint>
   
   <joint name="z_joint" type="fixed">
@@ -160,8 +168,8 @@
     <child link="z_axis" />
     <origin xyz="0 0 0.2" rpy="0 0 0" />
     <axis xyz="0 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
   </joint>
-
 
 
 	<!-- Unión entre Lila y Rojo -->
@@ -172,6 +180,7 @@
     <axis xyz="0 0 1" />
     <limit effort="10.0" lower="-3.25" upper="3.25" velocity="0.5" />
   </joint>
+
   <joint name="AzulClaro_joint" type="revolute">
     <parent link="arm_link" />
     <child link="AzulClaro" />
@@ -191,10 +200,11 @@
   </joint>
 
 <!-- Amarillo y cafe-->
-  <joint name="Prismatica" type="fixed">
+  <joint name="Quieta" type="fixed">
     <parent link="AzulClaro" />
     <child link="cafe_eslabon" />
     <origin xyz="0 -0.3 -0.15" rpy="1.57 0 0" />
+    <limit effort="0" lower="0" upper="0" velocity="0" />
   </joint>
 
 </robot>
